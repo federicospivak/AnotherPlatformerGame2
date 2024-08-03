@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://csrqt0ntof1q"]
+
+[ext_resource type="Script" path="res://Sprites/arrow.gd" id="1_kdhef"]
+[ext_resource type="Texture2D" uid="uid://bfq3t453vfl86" path="res://Sprites/arrow.png" id="1_u84rt"]
+[ext_resource type="Script" path="res://Scripts/HitBox.gd" id="3_bft1a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p55k0"]
+size = Vector2(9, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n133o"]
+size = Vector2(16, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hs28m"]
+size = Vector2(12, 4)
+
+[node name="Arrow" type="RigidBody2D"]
+modulate = Color(2, 2, 2, 1)
+collision_layer = 8192
+collision_mask = 0
+script = ExtResource("1_kdhef")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(3, 3, 3, 1)
+position = Vector2(4, 0)
+texture = ExtResource("1_u84rt")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("3_bft1a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(7.5, 0)
+shape = SubResource("RectangleShape2D_p55k0")
+
+[node name="ImpactDetector" type="Area2D" parent="."]
+collision_layer = 8192
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactDetector"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_n133o")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_hs28m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="ImpactDetector" to="." method="_on_impact_detector_area_entered"]
+[connection signal="body_entered" from="ImpactDetector" to="." method="_on_impact_detector_body_entered"]

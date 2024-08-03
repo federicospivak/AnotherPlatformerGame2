@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://bm6wbp208oth2"]
+
+[ext_resource type="Texture2D" uid="uid://b6baxsqceoer1" path="res://Sprites/item-sword.png" id="1_of261"]
+[ext_resource type="Script" path="res://Sprites/item_sword.gd" id="2_nbyhr"]
+
+[sub_resource type="Animation" id="Animation_x42lb"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_hkd2g"]
+resource_name = "move"
+loop_mode = 2
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_35tc2"]
+_data = {
+"RESET": SubResource("Animation_x42lb"),
+"move": SubResource("Animation_hkd2g")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2a87k"]
+radius = 7.0
+height = 22.0
+
+[node name="Item-sword" type="Sprite2D"]
+position = Vector2(37, 382)
+texture = ExtResource("1_of261")
+script = ExtResource("2_nbyhr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_35tc2")
+}
+autoplay = "move"
+
+[node name="sword_collision" type="Area2D" parent="."]
+collision_layer = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sword_collision"]
+visible = false
+shape = SubResource("CapsuleShape2D_2a87k")
+
+[connection signal="body_entered" from="sword_collision" to="." method="_on_sword_collision_body_entered"]

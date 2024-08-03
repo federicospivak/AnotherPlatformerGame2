@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://wjl8c851ewgx"]
+
+[ext_resource type="Shader" path="res://Scenes/newShader.gdshader" id="1_12nye"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pf1xp"]
+shader = ExtResource("1_12nye")
+
+[sub_resource type="Gradient" id="Gradient_110fj"]
+offsets = PackedFloat32Array(0.376623, 0.467532)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s4ljo"]
+noise_type = 2
+seed = 5
+frequency = 0.0144
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vyq45"]
+seamless = true
+color_ramp = SubResource("Gradient_110fj")
+noise = SubResource("FastNoiseLite_s4ljo")
+
+[node name="Fog" type="Sprite2D"]
+z_index = 10
+texture_repeat = 2
+material = SubResource("ShaderMaterial_pf1xp")
+position = Vector2(419, 547)
+scale = Vector2(1.26424, 0.175384)
+texture = SubResource("NoiseTexture2D_vyq45")

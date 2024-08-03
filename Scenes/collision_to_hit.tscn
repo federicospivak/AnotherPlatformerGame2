@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://cjufpyppx1lmq"]
+
+[node name="CollisionToHit" type="Area2D"]
+collision_layer = 1024

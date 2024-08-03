@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwbrodbr4bnr7"]
+
+[ext_resource type="Script" path="res://Scripts/Player/AttackReceivedBehavior.gd" id="1_kv0kq"]
+
+[node name="ShaderHit" type="Node"]
+script = ExtResource("1_kv0kq")
+
+[node name="InitialTimer" type="Timer" parent="."]
+wait_time = 0.1

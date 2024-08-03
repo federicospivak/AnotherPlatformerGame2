@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://56ppf6acyi2p"]
+
+[ext_resource type="Script" path="res://Scripts/particles.gd" id="1_53cct"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nwwho"]
+lifetime_randomness = 0.03
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+radial_velocity_min = -192.09
+radial_velocity_max = 50.0
+gravity = Vector3(0, 50, 0)
+scale_min = 0.0
+scale_max = 0.7
+color = Color(0.187066, 0.401796, 0.418349, 1)
+
+[node name="ParticleExplosionWall" type="GPUParticles2D"]
+modulate = Color(6, 6, 6, 1)
+self_modulate = Color(5, 5, 5, 1)
+top_level = true
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_nwwho")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("1_53cct")
